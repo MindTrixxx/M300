@@ -1,5 +1,5 @@
-# M300
+# M300 - Plattformübergreifende  Dienste in ein Netzwerk integrieren
 
-## Titel 1
+## Einleitung
 
-Das ist ok.dfdsfasfas
+Das Hauptthema ist Cloud Computing. In diesem Modul werden wir unter anderem mit Github, Vagrant und VisualStudio Code vertraut gemacht.  
