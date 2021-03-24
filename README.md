@@ -18,13 +18,13 @@ Das Hauptthema ist Cloud Computing. In diesem Modul werden wir unter anderem mit
 1. Auf www.github.com ein Benutzerkonto erstellen (Angabe von Username, E-Mail und Passwort)
 2. E-Mail zur Verifizierung des Kontos bestätigen und anschliessend auf GitHub anmelden
 3. Repository erstellen
-..1. Anmelden unter www.github.com
-..2.  Innerhalb der Willkommens-Seite auf Start a project klicken
-..3.  Unter Repository name einen Name definieren (z.B. M300)
-..4.  Optional: kurze Beschreibung eingeben
-..5. Radio-Button bei Public belassen
-..6.  Haken bei Initialize this repository with a README setzen
-..7.  Auf Create repository klicken
+4. Anmelden unter www.github.com
+*  Innerhalb der Willkommens-Seite auf Start a project klicken
+*  Unter Repository name einen Name definieren (z.B. M300)
+*  Optional: kurze Beschreibung eingeben
+*  Radio-Button bei Public belassen
+*  Haken bei Initialize this repository with a README setzen
+*  Auf Create repository klicken
 
 ### Visualstudio Code Extensions
 
