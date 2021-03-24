@@ -5,25 +5,8 @@
 Das Hauptthema ist Cloud Computing. In diesem Modul werden wir unter anderem mit Github, Vagrant und VisualStudio Code vertraut gemacht. 
 
 <img src="/Bilder/Bilder1.jpg" alt="Check"/>
+<img src="/Bilder/Bilder2.jiff" alt="Check"/>
 
-#### Lernziele
-
-Sie können die Sicherheit in einer virtualisierte Infrastruktur Verbessern.
-
-#### Voraussetzungen
-* [10 Toolumgebung](../10-Toolumgebung/)
-* [20 Virtualisierte Infrastruktur](../20-Infrastruktur/)
-
-#### Inhaltsverzeichnis
-
-* 01 - [Firewall & Reverse Proxy](#-01---firewall--reverse-proxy)
-* 02 - [Benutzer- & Rechteverwaltung (optional)](#-02---benutzer---rechteverwaltung)
-* 03 - [SSH](#-03---ssh)
-* 04 - [Authentifizierung & Autorisierung (optional)](#-04---authentifizierung--autorisierung)
-* 05 - [Reflexion](#-05---reflexion)
-* 06 - [Fragen](Fragen.md)
-* 08 - [Quellenverzeichnis](#-08---quellenverzeichnis)
-* 09 - [Beispiele](#-09---beispiele)
 
 
 
