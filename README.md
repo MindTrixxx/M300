@@ -6,9 +6,7 @@ Das Hauptthema ist Cloud Computing. In diesem Modul werden wir unter anderem mit
 
 <img src="/Bilder/Bilder1.jpg" alt="Check"/>
 <img src="/Bilder/Bilder2.jpg" alt="Check"/>
-
-
-
+这个娃儿不睡觉
 
 ## 2. Voraussetzungen
 ### 2.1 Virtualbox installiert
