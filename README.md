@@ -5,13 +5,29 @@
 Das Hauptthema ist Cloud Computing. In diesem Modul werden wir unter anderem mit Github, Vagrant und VisualStudio Code vertraut gemacht. 
 
 <img src="/Bilder/Bilder1.jpg" alt="Check"/>
-<img src="/Bilder/Bilder2.jpg" alt="Check"/>
-这个娃儿不睡觉
 
 ## 2. Voraussetzungen
-### 2.1 Virtualbox installiert
-### 2.2 Gitpush Account registriert
-### 2.3 Editor Visualstudio Code installiert
+1. Virtualbox installiert
+2. Github Account registriert
+3. Editor Visualstudio Code installiert
+4. Vagrant
+5. Windows 10
+
+### Github Account
+
+1. Auf www.github.com ein Benutzerkonto erstellen (Angabe von Username, E-Mail und Passwort)
+2. E-Mail zur Verifizierung des Kontos bestätigen und anschliessend auf GitHub anmelden
+3. Repository erstellen
+..* Anmelden unter www.github.com
+..* Innerhalb der Willkommens-Seite auf Start a project klicken
+..* Unter Repository name einen Name definieren (z.B. M300)
+..* Optional: kurze Beschreibung eingeben
+..* Radio-Button bei Public belassen
+..* Haken bei Initialize this repository with a README setzen
+..* Auf Create repository klicken
+
+### Visualstudio Code Extensions
+
 Extensions installieren
 Wir fügen dem Editor drei wichtige Extensions hinzu:
 
@@ -20,8 +36,6 @@ Vagrant Extension (von Marco Stanzi)
 vscode-pdf Extension (von tomiko1207)
 Dazu müssen folgende Anweisungen befolgt werden:
 
-Visual Studio Code öffnen
-Die Tastenkombination CTRL + SHIFT + X drücken und in der Suchleiste die erwähnten Extensions suchen.
 
 10 Toolumgebung aufsetzen
 GitHub Bash
