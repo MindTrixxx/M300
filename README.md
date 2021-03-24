@@ -5,7 +5,7 @@
 Das Hauptthema ist Cloud Computing. In diesem Modul werden wir unter anderem mit Github, Vagrant und VisualStudio Code vertraut gemacht. 
 
 <img src="/Bilder/Bilder1.jpg" alt="Check"/>
-<img src="/Bilder/Bilder2.jiff" alt="Check"/>
+<img src="/Bilder/Bilder2.jpg" alt="Check"/>
 
 
 
