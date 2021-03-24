@@ -1,4 +1,4 @@
-#### Wichtiges zu Vagrant
+# Wichtiges zu Vagrant
 
 Hier befindet sich eine kleine Ansammlung von Vagrant Befehle
 
