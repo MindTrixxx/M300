@@ -10,3 +10,6 @@ Hier befindet sich eine kleine Ansammlung von Vagrant Befehle
 | Vagrant snapshot         | Ein Snapshot wird erstellt.         | Wenn man mit der VM experimentiert, ist es ratsam ein Snapshot zu erstellen.                             |
 | Vagrant restore           | Ein Snapshot wird wiederhergestellt.              | Wenn man etwas falsch gemacht hat, kann man einen vorherigen Snapshot wiederherstellen.                             |
 | Vagrant destory          | Vagrant VM wird gelöscht.             | Die sich im Ordner befindende VM wird gelöscht.                                |
+
+
+Weitere Befehle unter: https://www.vagrantup.com/docs/cli/
