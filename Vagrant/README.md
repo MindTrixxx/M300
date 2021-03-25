@@ -4,6 +4,9 @@ Hier befindet sich eine kleine Ansammlung von Vagrant Befehle
 
 | Vagrant Befehle        | Definition             | Beschreibung                      |
 | :--------------------:   |:-------------         | :-----                            |
+| Vagrant version           | Version check           | Zeigt Vagrant version Information                          |
+| Vagrant box           | für die Verwaltung           | Für die Verwaltung des VMs                           |
+
 | Vagrant init           | VM erstellen           | Erstellt im Ordner ein Vagrant VM                           |
 | Vagrant up             | VM starten             | Vagrant File im Ordner wird gestartet                             |
 | Vagrant ssh            | Verbindet sich via SSH mit VM         | Die Verbindung zu VM wird aufgebaut und es kann nun Befehle auf der Konsole ausgeführt werden.                                |
