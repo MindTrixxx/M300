@@ -3,7 +3,7 @@
 Hier befindet sich eine kleine Ansammlung von Vagrant Befehle
 
 | Vagrant Befehle        | Definition             | Beschreibung                      |
-| :--------------------:   |:-------------         | :-----                            |
+| :--------------------   |:-------------         | :-----------                            |
 | Vagrant version           | Version check           | Zeigt Vagrant version Information                          |
 | Vagrant box           | für die Verwaltung           | Für die Verwaltung des VMs                           |
 | Vagrant init           | VM erstellen           | Erstellt im Ordner ein Vagrant VM                           |
