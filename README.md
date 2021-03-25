@@ -26,6 +26,13 @@ Das Hauptthema ist Cloud Computing. In diesem Modul werden wir unter anderem mit
 *  Haken bei Initialize this repository with a README setzen
 *  Auf Create repository klicken
 
+* SSH Key generiert und eingebunden \
+In der Git Bash: 
+```
+ssh-keygen -t rsa -b 4096 -C "hansmuster@gmail.com"
+```
+
+
 ### Visualstudio Code Extensions
 
 Extensions installieren
