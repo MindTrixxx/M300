@@ -4,7 +4,7 @@
 
 Das Hauptthema ist Cloud Computing. In diesem Modul werden wir unter anderem mit Github, Vagrant und VisualStudio Code vertraut gemacht. 
 
-<img src="LB01/Bilder/Bild1.jpg" alt="Check"/>
+<img src="/Bilder/Bild1.jpg" alt="Check"/>
 
 ## 2. Voraussetzungen
 1. Virtualbox installiert
