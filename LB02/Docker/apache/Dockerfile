@@ -2,7 +2,7 @@
 #	Einfache Apache Umgebung
 #
 FROM ubuntu:14.04
-MAINTAINER Marcel mc-b Bernet <marcel.bernet@ch-open.ch>
+
 
 RUN apt-get update
 RUN apt-get -q -y install apache2 
