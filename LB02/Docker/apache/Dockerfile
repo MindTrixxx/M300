@@ -1,7 +1,7 @@
 #
 #	Einfache Apache Umgebung
 #
-FROM ubuntu:20.04
+FROM ubuntu:20.10
 
 
 RUN apt-get update
