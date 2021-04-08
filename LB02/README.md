@@ -1,6 +1,12 @@
 # Wichtiges zu Docker
 
+
 <img src="/Bilder/Bild3.jpg" alt="Check"/>
+
+
+### Dockerfile
+#### Was ist ein Dockerfile?
+In Dockerfile kann man Befehle definieren, anhand von diesen Befehlen werden dann entsprechend ein Image erstellt.
 
 Hier befindet sich eine kleine Ansammlung von Docker Befehlen
 
@@ -34,5 +40,11 @@ Commands:
 
 Run 'docker image COMMAND --help' for more information on a command.
 ``` 
+docker pull IMAGENAME --> holt image
+docker image --> zeigt heruntergeladene Images an
+docker run -d -t --name ContainerName ImageName --> Container mit bestimmten Namen starten
+docker container exec -it ContainerName /bin/bash --> geht in VM
 
 Alles weitere zu commands hier. https://docs.docker.com/engine/reference/commandline/docker/
+
+<img src="/Bilder/Bild4.jpg" alt="Check"/>
