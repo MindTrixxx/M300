@@ -1,50 +1,118 @@
-# Wichtiges zu Docker
+### Container absichern
+***
+Zu den wichtigsten Dingen, um einen Container abzusichern, gehören:
+* Die Container laufen in einer VM oder auf einem dedizierten Host, um zu vermeiden, dass andere Benutzer oder Services angegriffen werden können.
+* Der Load Balancer / Reverse-Proxy ist der einzige Container, der einen Port nach aussen freigibt, wodurch viel Angriffsfläche verschwindet. Monitoring oder Logging-Services sollten über private Schnittstellen oder VPN nutzbar sein.
+* Alle Images definieren einen Benutzer und laufen nicht als root.
+* Alle Images werden über den eigenen Hash heruntergeladen oder auf anderem Wege sicher erhalten und verifiziert.
+* Die Anwendung wird überwacht und es wird Alarm ausgelöst, wenn eine ungewöhnliche Netzwerklast oder auffällige Zugriffsmuster erkannt werden.
+* Alle Container laufen mit aktueller Software und im Produktivmodus – Debug-Informationen sind abgeschaltet.
+* AppArmor oder SELinux sind auf dem Host aktiviert
+* Services wie z.B. Apache, Mysql ist mir irgendeiner Form der Zugriffskontrolle oder einem Passwortschutz ausgestattet.
+
+**Weitere Massnahmen:** <br>
+* Unnötige `setuid-Binaries` werden aus den `identidock-Images` entfernt. Damit verringert sich das Risiko, dass Angreifer, die Zugriff auf einen Container erhalten haben, ihre Berechtigungen erweitern können.
+* Dateisysteme werden so weit wie möglich schreibgeschützt eingesetzt.
+* Nicht benötigte Kernel-Berechtigungen werden so weit wie möglich entfernt.
+
+**Beim Einsatz sicherheitskritischer Container:** <br>
+* Der Speicher für jeden Container wird durch das Flag `-m` begrenzt. Damit werden ein paar DoS-Angriffe und Speicherlecks eingedämmt. Die Container müssen dabei entweder per Profiler analysiert werden oder man gibt sehr grosszügige Speichergrenzen vor.
+* SELinux mit speziellen Typen für die Container ausführen. Das kann eine sehr effektive Sicherheitsmassnahme sein, aber sie erfordert einiges an Arbeit.
+* Ein `ulimit` auf die Anzahl der Prozesse anwenden. Diese Grenze ist für den Benutzer des Containers gültig, daher kann es schwieriger einzusetzen sein, als man denkt. So vermeidet man die Gefahr von Fork-Bomben, die als DoSAngriff eingesetzt werden.
+* Interne Kommunikation wird verschlüsselt, so dass es für Angreifer schwieriger wird, die Daten zu beeinflussen.
+
+Zusätzlich sollte es regelmässige Audits für das System geben, um sicherzustellen, dass alles aktuell ist und sich keine Container Ressourcen unter den Nagel reissen.
 
 
-<img src="/Bilder/Bild3.jpg" alt="Check"/>
+### Container nach Host trennen
+***
+Hat man ein Multitenancy-Setup, bei dem Container für mehrere Benutzer laufen (sei es, dass es sich um interne Benutzer im Unternehmen oder um externe Kunden handelt), stellt man sicher, dass jeder Benutzer auf einem eigenen Docker Host untergebracht ist.
+
+Das ist zwar weniger effizient, als Hosts mit mehreren Benutzern zu teilen, aber sehr wichtig für die Sicherheit. Der Hauptgrund ist, damit Container-Breakouts zu verhindern, bei denen ein Anwender Zugriff auf die Container oder Daten eines anderen Anwenders erhält.
+
+Geschieht solch ein Breakout, befindet sich der Angreifer immer noch auf einer getrennten VM oder einem eigenen Rechner, sodass er nicht problemlos auf Container anderer Benutzer zugreifen kann.
 
 
-### Dockerfile
-#### Was ist ein Dockerfile?
-In Dockerfile kann man Befehle definieren, anhand von diesen Befehlen werden dann entsprechend ein Image erstellt.
+### Weitere Sicherheitstipps
+***
+Diese Seite enthält praktische Tipps zum Absichern von Container-Deployments.
 
-Hier befindet sich eine kleine Ansammlung von Docker Befehlen
+Nicht alle Ratschläge werden für alle Deployments umsetzbar sein, aber man sollte sich mit den grundlegenden Tools vertraut machen, die eingesetzt werdenkönnen.
 
-| Vagrant Befehle        |Beschreibung                      |
-| :--------------------  | :-----------                    |
-| Docker Version          | Version Information anzeigen        |                        
-| Docker pull ...        | Für die Verwaltung der Dockerumgebung        |
-| Docker run image ...         | Starten von Docker image        |
-| Docker stop container ...         | Docker stoppen        |
-| Docker rm container ... / docker rmi image ...         | Docker File löschen        |
-| Docker status         | Statusinformationen zu Dockerimage anzeigen        |
+**User setzen** <br>
+Um zu vermeiden, dass `root` genutzt wird, sollten man in den Dockerfiles immer einen Benutzer mit weniger Rechten erstellen und mit der USER-Anweisung zu ihm wechseln.
+```Shell
+    $ RUN groupadd -r user_grp && useradd -r -g user_grp user
+    $ USER user
+```
 
+**Netzwerkzugriff beschränken** <br>
+Ein Container sollte in der Produktivumgebung nur die Ports öffnen, die er tatsächlich benötigt, und diese sollten auch nur für die anderen Container erreichbar sein, die sie brauchen.
 
-## Image Commands Benutzung
+**setuid/setgid-Binaries entfernen** <br>
+Die Wahrscheinlichkeit, dass eine Anwendung keine setuid- oder setgid-Binaries benötigt, ist recht hoch. Können wir solche Binaries deaktivieren oder entfernen, verhindern wir, dass sie zur unerlaubten Rechteauswertung eingesetzt werden.
+```Shell
+    $ FROM ubuntu:14.04
 
-``` 
+       ... Installation der benötigten Software
+       ... User anlegen
 
-Commands:
-  build       Build an image from a Dockerfile
-  history     Show the history of an image
-  import      Import the contents from a tarball to create a filesystem image
-  inspect     Display detailed information on one or more images
-  load        Load an image from a tar archive or STDIN
-  ls          List images
-  prune       Remove unused images
-  pull        Pull an image or a repository from a registry
-  push        Push an image or a repository to a registry
-  rm          Remove one or more images
-  save        Save one or more images to a tar archive (streamed to STDOUT by default)
-  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+    $ RUN find / -perm +6000 -type f -exec chmod a-s {} \; || true
+```
 
-Run 'docker image COMMAND --help' for more information on a command.
-``` 
-docker pull IMAGENAME --> holt image
-docker image --> zeigt heruntergeladene Images an
-docker run -d -t --name ContainerName ImageName --> Container mit bestimmten Namen starten
-docker container exec -it ContainerName /bin/bash --> geht in VM
+**Speicher begrenzen** <br>
+Durch die Begrenzung des verfügbaren Speichers schützen man sich vor DoSAngriffen und Anwendungen mit Speicherlecks, die nach und nach den Speicher auf dem Host auffressen.
+```Shell
+    $ docker run -m 128m --memory-swap 128m amouat/stress stress --vm 1 --vm-bytes 127m -t 5s
+```
 
-Alles weitere zu commands hier. https://docs.docker.com/engine/reference/commandline/docker/
+**CPU-Einsatz beschränken** <br>
+Kann ein Angreifer einen Container – oder eine ganze Gruppe – dazu bringen, die CPU des Host vollständig auszulasten, werden andere Container auf dem Host nicht mehr arbeiten können, und man hat es mit einem DoS-Angriff zu tun.
 
-<img src="/Bilder/Bild4.jpg" alt="Check"/>
+In Docker wird die CPU-Zuteilung über eine relative Gewichtung ermittelt, wobei ein Standardwert von 1024 genutzt wird – normalerweise erhalten also alle Container gleich viel CPU-Zeit.
+
+Beispiel: Starten von 4 Container mit unterschiedlicher CPU-Zuweisung:
+```Shell
+    $ docker run -d --name load1 -c 2048 amouat/stress
+    $ docker run -d --name load2 amouat/stress
+    $ docker run -d --name load3 -c 512 amouat/stress
+    $ docker run -d --name load4 -c 512 amouat/stress
+
+    $ docker stats $(docker inspect -f {{.Name}} $(docker ps -q))
+```
+
+**Neustarts begrenzen** <br>
+Stirbt ein Container immer wieder und wird dann neu gestartet, muss das System nicht unerheblich Zeit und Ressourcen aufwenden, was im Extremfall auch zu einem DoS führen kann.
+
+Das lässt sich leicht mit der Neustart-Vorgabe `on-failure` statt `always` vermeiden:
+```Shell
+    $ docker run -d --restart=on-failure:10 my-flaky-image
+```
+
+**Zugriffe auf die Dateisysteme begrenzen** <br>
+Wenn man verhindert, dass Angreifer in Dateien schreiben, stört man damit eine ganze Reihe von Angriffen und machen das Leben von Hackern ganz allgemein schwerer.
+
+Kein Skript kann in eine Datei schreiben und die eigenen Anwendung dazu bringen, diese auszuführen, oder kritische Daten oder Konfigurationsdateien überschreiben.
+
+Seit Docker 1.5 kann `docker run` das Flag `--read-only` übergeben, welches das Dateisystem des Containers komplett schreibgeschützt macht:
+```Shell
+    $ docker run --read-only ubuntu touch x
+```
+
+**Capabilities einschränken** <br>
+Der Linux-Kernel definiert eine Reihe von Berechtigungen (Capabilities), welche Prozessen zugewiesen werden können, um ihnen einen erweiterten Zugriff auf das System zu gestatten.
+
+Die Capabilities decken einen grossen Funktionsbereich ab, vom Ändern der Systemzeit bis hin zum Öffnen von Netzwerk-Sockets.
+
+```Shell
+    $ docker run --cap-drop all --cap-add CHOWN ubuntu chown 100 /tmp
+```
+
+**Ressourcenbeschränkungen (ulimits) anwenden** <br>
+Der Linux-Kernel definiert Ressourcenbeschränkungen, die für Prozesse gesetzt werden können – z.B. die Anzahl der Kind-Prozesse, die sich forken lassen, oder die Anzahl der zulässigen offenen File-Deskriptoren.
+
+Diese lassen sich auch auf Docker-Container anwenden – entweder durch Übergabe des Flags `--ulimit` an `docker run` oder durch das Setzen containerübergreifender Standards per `--default-ulimit` beim Start des Docker Daemon.
+
+```Shell
+    $ docker run --ulimit cpu=12:14 amouat/stress stress --cpu 1
+```
