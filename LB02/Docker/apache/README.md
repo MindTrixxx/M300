@@ -52,3 +52,7 @@ Das Index File sieht folgendermassen aus:
 </body>
 </html>
 ```
+
+#### Testfall
+Beim Testen kann man sehen, dass es funktioniert hat.
+<img src="/Bilder/Bild5.jpg" alt="Check"/>
