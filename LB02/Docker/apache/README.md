@@ -56,3 +56,5 @@ Das Index File sieht folgendermassen aus:
 #### Testfall
 Beim Testen kann man sehen, dass es funktioniert hat.
 <img src="/Bilder/Bild5.jpg" alt="Check"/>
+
+<img src="/Bilder/Bild6.jpg" alt="Check"/>
