@@ -1,4 +1,4 @@
-### Container absichern
+# Container absichern
 ***
 Zu den wichtigsten Dingen, um einen Container abzusichern, gehören:
 * Die Container laufen in einer VM oder auf einem dedizierten Host, um zu vermeiden, dass andere Benutzer oder Services angegriffen werden können.
@@ -116,3 +116,42 @@ Diese lassen sich auch auf Docker-Container anwenden – entweder durch Übergab
 ```Shell
     $ docker run --ulimit cpu=12:14 amouat/stress stress --cpu 1
 ```
+
+## Container Sicherheit
+### Sicherheiten
+#### Nicht als root in den Container gehen
+Dazu muss man folgende Zeilen im Dockerfile machen:
+```
+RUN useradd -ms /bin/bash NeuerUserName
+
+USER NeuerUserName
+
+WORKDIR /homeNeuerUserName
+```
+Der unterste Befehl ist nicht nötigt. Dieser sagt nur aus in welchem Verzeichnis man sein sollte, wenn man sich mit dem Container verbindet (im Home Verzeihcnis hat der User Admin Berechtigung)
+
+#### Read-Only
+Wenn man den Docker mit der Option read-only startet, können keine Änderungen am Dateisystem vorgenommen werden (auch mit sudo nicht):
+`docker run --read-only -d -t --name NameDesContainer Image`
+
+#### Dockerfile's
+Ein wichtiger Punkt bei dem man sich und seine Netzwerkumgebung schützen kann ist, dass man seine Dockerfile's selber schreibt. Wenn man das macht und nicht irgendwelche Images aus dem Internet herunterladet kann man sich sicher sein, dass diese nicht mit Malware oder sonst was verseucht sind.
+
+## Monitoring
+#### Cadvisor
+Cadvisor ist eine Überwachungs Tool von Google. Mit folgendem Befehl kann ein Container erstellt werden, welcher Cadvisor enthält:\
+`docker run -d --name cadvisor -v /:/rootfs:ro -v /var/run:/var/run:rw -v /sys:/sys:ro -v /var/lib/docker/:/var/lib/docker:ro -p 8081:8080 google/cadvisor:latest`
+
+## Docker Hub
+### Image bereitstellen
+Zuerst muss ein Container mit einem Image erstellt werden. Danach führt man folgenden Befehl aus:
+`docker commit ContainerIDMitDemGewünschtenImage DockerhubUserName/GewünschterName:Tag`
+
+Danach pusht man das ganze auf Docker Hub:
+`docker push DockerHubUserName/GewünschterName:Tag`
+
+Achtung: Das funktioniert nur, wenn man an der console mit einem Docker Account angemeldet ist (`docker login`).
+
+### Image pullen
+Das Image kann nun mit pull heruntergelade werden. Dazu muss man folgenden Befehl eingeben:
+`docker pull DockerHubUserName/GewünschterName:Tag`
