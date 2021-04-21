@@ -37,7 +37,7 @@ File Applyn:
 `kubectl apply -f Name.yaml`
 
 Mit `kubectl get pods` Kann man die Pods anzeigen lassen:
-![alt text](https://github.com/BlackStar8440/M300-Services/blob/main/LB02/images/kub/ApplyYml.PNG)
+
 
 ### Service 
 Ein File .yaml erstellt, das ein Loadbalancer (Service) macht:
@@ -69,21 +69,7 @@ Service ausführen:
 Service anzeigen:
 `kubectl get services`
 
-Der rote umrandete Service ist der, welcher ich erstellt habe, die anderen sind nicht von mir:
-![alt text](https://github.com/BlackStar8440/M300-Services/blob/main/LB02/images/kub/ApplyService.PNG)
 
-Im Bild oben sieht man, dass es eine PortForwarding vom Port 80 auf 31722 gibt, welcher funktioniert:
-![alt text](https://github.com/BlackStar8440/M300-Services/blob/main/LB02/images/kub/KubWeb.PNG)
-
-#### Beweis, dass LoadBalancer funktioniert
-Mit folgendem Befehl sieht man einige Informationen über einen Service:
-`kubectl describe services ServiceName`
-
-Unter dem Punkt Endpoint werden alle IPs angegeben, von den Container welche im LoadBalancer enthalten sind. Im Deployment waren drei Replicas definiert, welche man hier sieht:
-![alt text](https://github.com/BlackStar8440/M300-Services/blob/main/LB02/images/kub/LoadBalancing.PNG)
-
-Wenn man die Replicas im Deployment auf 5 erhöht sieht man dass, was bedeutet der LoadBalancer funktioniert:
-![alt text](https://github.com/BlackStar8440/M300-Services/blob/main/LB02/images/kub/LoadBalancing5More.PNG)
 
 Meine Erfahrungen
 ```
