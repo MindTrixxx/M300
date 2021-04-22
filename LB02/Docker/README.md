@@ -155,3 +155,10 @@ Achtung: Das funktioniert nur, wenn man an der console mit einem Docker Account 
 ### Image pullen
 Das Image kann nun mit pull heruntergelade werden. Dazu muss man folgenden Befehl eingeben:
 `docker pull DockerHubUserName/GewünschterName:Tag`
+
+
+Meine Erfahrungen
+```
+Verglichen mit Vagrant ist Docker etwas komplizierter, es bietet jedoch mehr Möglichkeiten. Ich weiss nun, wie man ein einfacher Dockerfile erstellt und diese auch benutzt.
+
+```

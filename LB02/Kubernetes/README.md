@@ -73,6 +73,6 @@ Service anzeigen:
 
 Meine Erfahrungen
 ```
-
+Das Arbeiten mit Kubernetes war nicht einfach für mich. Es fehlt mir noch viel Wissen, damit ich ein richtiges Projekt machen kann. Jedoch verglichen mit zuvor kenne ich Kubernetes einiges besser und kann auch mit einfachen Befehlen, Pods, Services deployment machen. Das Prinzip und die Vorteile von Kubernetes sind enorm. Das ist sehr zukunftsorientiert und ich kann mir vorstellen, dass Firmen später vermehrt auf Cloud Computing wechselt.
 
 ```
